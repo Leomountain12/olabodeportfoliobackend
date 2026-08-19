@@ -3,7 +3,6 @@ import Message from '../models/Message.js';
 
 const router = express.Router();
 
-// Get all messages
 router.get('/', async (req, res) => {
   try {
     const messages = await Message.find().sort({ createdAt: -1 });
@@ -13,7 +12,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Create message
 router.post('/', async (req, res) => {
   try {
     const message = new Message(req.body);
@@ -24,7 +22,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update message (mark read/replied)
 router.put('/:id', async (req, res) => {
   try {
     const message = await Message.findByIdAndUpdate(
@@ -39,7 +36,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete message
 router.delete('/:id', async (req, res) => {
   try {
     const message = await Message.findByIdAndDelete(req.params.id);

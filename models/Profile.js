@@ -13,9 +13,9 @@ const profileSchema = new mongoose.Schema({
     tiktok: { type: String, default: 'https://tiktok.com/@leodcatalyst' },
     facebook: { type: String, default: 'https://facebook.com/leodcatalyst' },
   },
-  socialOrder: { 
-    type: [String], 
-    default: ['github', 'linkedin', 'twitter', 'instagram', 'youtube', 'tiktok', 'facebook'] 
+  socialOrder: {
+    type: [String],
+    default: ['github', 'linkedin', 'twitter', 'instagram', 'youtube', 'tiktok', 'facebook'],
   },
   updatedAt: { type: Date, default: Date.now },
 });

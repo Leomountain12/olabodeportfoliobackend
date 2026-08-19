@@ -4,7 +4,6 @@ import { v2 as cloudinary } from 'cloudinary';
 
 const router = express.Router();
 
-// Get all projects
 router.get('/', async (req, res) => {
   try {
     const projects = await Project.find().sort({ createdAt: -1 });
@@ -14,7 +13,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get single project
 router.get('/:id', async (req, res) => {
   try {
     const project = await Project.findById(req.params.id);
@@ -25,7 +23,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Create project
 router.post('/', async (req, res) => {
   try {
     const project = new Project(req.body);
@@ -36,7 +33,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update project
 router.put('/:id', async (req, res) => {
   try {
     const project = await Project.findByIdAndUpdate(
@@ -51,12 +47,10 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete project
 router.delete('/:id', async (req, res) => {
   try {
     const project = await Project.findByIdAndDelete(req.params.id);
     if (!project) return res.status(404).json({ error: 'Project not found' });
-    // Delete image from Cloudinary if exists
     if (project.image) {
       const publicId = project.image.split('/').pop().split('.')[0];
       await cloudinary.uploader.destroy(`portfolio/projects/${publicId}`);
@@ -67,7 +61,6 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// Upload project image
 router.post('/upload-image', async (req, res) => {
   try {
     const { image, projectTitle } = req.body;
